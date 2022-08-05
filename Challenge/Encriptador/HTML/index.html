@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/reset.css">
+    <link rel="stylesheet" href="../CSS/style.css">
+    <title>Encriptador</title>
+</head>
+<body class="container">
+    <h1>Encriptador/Desencriptador de texto.</h1> <br>  
+    <p>Ingrese texto</p> <br>
+    <input style="width:50%" id="texto" onkeyup="validar(this)" type="text" required><br><br>
+
+    <button id="encriptador" type="button">Encriptar</button>
+
+    <button id="desencriptador"  type="button">Desencriptar</button>
+
+    <br> <br>
+
+    <label for="mensajecifrado">Mensaje</label>
+    <br>
+    <textarea readonly="enable" name="" id="mensajecifrado" style="width:50%" cols="50" rows="10" required></textarea>
+    <br>
+    <button id="copiarTxt" onclick="copiarTexto()" type="button"> Copiar mensaje </button>
+
+    <script>
+        function logica(texto,method){
+            /*
+            `La letra "e" es convertida para "enter"`
+            `La letra "i" es convertida para "imes"`
+            `La letra "a" es convertida para "ai"`
+            `La letra "o" es convertida para "ober"`
+            `La letra "u" es convertida para "ufat"` 
+            
+            let mapletras = new Map();
+            mapletras.set("a","ai");
+            mapletras.set("e","enter");
+            mapletras.set("i","imes");
+            mapletras.set("o","ober");
+            mapletras.set("u","ufat");
+            Con REGEX mas sencillo.
+            */
+            if (method == 1){
+                texto = texto.replace(/e/gi,"enter");
+                texto = texto.replace(/i/gi,"imes");
+                texto = texto.replace(/a/gi,"ai");
+                texto = texto.replace(/o/gi,"ober");
+                texto= texto.replace(/u/gi,"ufat");
+                return texto;
+            }
+            else if(method == 2){ //lo mismo que arriba pero al reves
+                texto = texto.replace(/enter/gi,"e");
+                texto = texto.replace(/imes/gi,"i");
+                texto = texto.replace(/ai/gi,"a");
+                texto = texto.replace(/ober/gi,"o");
+                texto= texto.replace(/ufat/gi,"u");
+                return texto;
+            }
+            
+        }
+
+        function validar(elemento){
+            return 1;
+        }
+
+        function encriptar() {
+            var input = document.querySelector("input");
+            let textoPlano = input.value;
+            let textoEncriptado =  logica(textoPlano,1);
+            document.getElementById("mensajecifrado").innerHTML = textoEncriptado;    
+        }
+
+        function desencriptar() {
+            var input = document.querySelector("input");
+            let textoPlano = input.value;
+            let textoDesencriptado =  logica(textoPlano,2);
+            document.getElementById("mensajecifrado").innerHTML = textoDesencriptado;    
+        }
+
+        function copiarTexto(){
+            var texto = document.getElementById("mensajecifrado");
+            texto.select();
+            document.execCommand('copy');
+        }
+    
+    
+    
+        var button1 = document.querySelector("#encriptador");
+        button1.onclick = encriptar;
+
+        var button2 = document.querySelector("#desencriptador");
+        button2.onclick = desencriptar;
+               
+    </script>
+    
+</body>
+</html>
+
+
