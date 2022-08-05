@@ -1,5 +1,69 @@
-.container{
-    width: 100%;
+
+.cuerpo-principal{
+    background-color: #297ae3;
+    margin: 29px;
+    padding: 10px;
+}
+header{
+    text-align: center;
+    color: #fff;
+    font-size: larger;
+    display:block;
+    background:#297ae3;
+}
+
+
+.caja{
+    position: relative;
+    margin: 0 auto;
+    
+
+}
+.mensajetextarea{
+    background:#297ae3;
+    border:none; 
+    display: inline-block;
+
+  
+}
+.bloquemensaje{
     padding:10px;
-    margin:10px;
+    margin:0 auto;
+}
+
+
+.mensaje{
+    border-radius: 10px;
+}
+.btn-encriptador{
+    width:40%;
+    padding: 15px 0;
+    font-size: 18px;
+    color:white;
+    background: grey;
+    border:none;
+    border-radius: 10px;
+    transition: 1s all;
+    cursor: pointer;
+
+}
+.btn-segundo{
+    width:40%;
+    padding: 15px 0;
+    font-size: 18px;
+    color:white;
+    background: rgb(55, 104, 196);
+    border:none;
+    border-radius: 10px;
+    transition: 1s all;
+    cursor: pointer;
+
+}
+
+.footer{
+    text-align: center;
+    padding: 40px;
+    font-size: 13px;
+    color: white;
+    margin: 20px;
 }

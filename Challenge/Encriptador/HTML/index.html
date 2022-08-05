@@ -1,31 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link rel="stylesheet" href="../CSS/reset.css">
     <link rel="stylesheet" href="../CSS/style.css">
     <title>Encriptador</title>
 </head>
-<body class="container">
-    <h1>Encriptador/Desencriptador de texto.</h1> <br>  
-    <p>Ingrese texto</p> <br>
-    <input style="width:50%" id="texto" onkeyup="validar(this)" type="text" required><br><br>
+<body class="cuerpo-principal">
+    <header>
+        <div class="caja" >
+            <img src="https://play-lh.googleusercontent.com/IDLZXWHLCVun428g_YGnR2HgnoIUlIRNfkmEEM0hmrzhBKZrhJ5UwM0_eHaWQT4gXAs=w240-h480" style="width: 150px;" alt="">
+            <h1>Encriptador/Desencriptador de texto.</h1> <br> 
+        </div>
+         
+    </header>
+    <main>
+        <div class="cuerpo-principal">
+            <div class="mensajetextarea">
+                <textarea  required id="texto"  placeholder="Ingrese el texto aqui" onchange=verificar(this) type="text" > </textarea>
+                <div id="elemento" style="display:none;"> <p class="texto-aviso"><strong>Se requiere texto.</strong></p></div>
+                
+                <p>&#9888 solo minusculas y letras sin acento.</p>
 
-    <button id="encriptador" type="button">Encriptar</button>
+                <button class="btn-encriptador" id="encriptador" type="submit">Encriptar</button>
+        
+                <button class="btn-segundo" id="desencriptador"  type="submit">Desencriptar</button>
+        
+                <div class="bloquemensaje">
+                    <textarea  class="mensaje" readonly="enable" placeholder="Ingresa un texto para encriptar o desencriptar" name="" id="mensajecifrado" cols="20" rows="10"></textarea>
+                    
+                    <button class="btn-segundo" id="copiarTxt" onclick="copiarTexto()" type="button"> Copiar mensaje </button>
+                </div>
+            </div>
+        </div>
 
-    <button id="desencriptador"  type="button">Desencriptar</button>
-
-    <br> <br>
-
-    <label for="mensajecifrado">Mensaje</label>
-    <br>
-    <textarea readonly="enable" name="" id="mensajecifrado" style="width:50%" cols="50" rows="10" required></textarea>
-    <br>
-    <button id="copiarTxt" onclick="copiarTexto()" type="button"> Copiar mensaje </button>
+    </main>
+    <footer>
+        <p class="footer"> Encriptador - Academia ONE - Santiago Pérez - 2022</p>
+    </footer>
+    
+   
 
     <script>
+        function verificar(e){
+            var input = document.querySelector("#texto");
+            let texto = input.value;
+            if (texto.length === 0 ){
+			    document.getElementById('elemento').style.display = 'block';
+                return false;
+            }
+            else{
+                document.getElementById('elemento').style.display = 'none';
+                return true;
+            }
+            }
+        
+        
+
         function logica(texto,method){
             /*
             `La letra "e" es convertida para "enter"`
@@ -42,15 +76,17 @@
             mapletras.set("u","ufat");
             Con REGEX mas sencillo.
             */
-            if (method == 1){
+            if (method == 1 && verificar(texto) ){
+                
                 texto = texto.replace(/e/gi,"enter");
                 texto = texto.replace(/i/gi,"imes");
                 texto = texto.replace(/a/gi,"ai");
                 texto = texto.replace(/o/gi,"ober");
                 texto= texto.replace(/u/gi,"ufat");
                 return texto;
+                
             }
-            else if(method == 2){ //lo mismo que arriba pero al reves
+            else if(method == 2 && verificar(texto)){ //lo mismo que arriba pero al reves
                 texto = texto.replace(/enter/gi,"e");
                 texto = texto.replace(/imes/gi,"i");
                 texto = texto.replace(/ai/gi,"a");
@@ -60,29 +96,41 @@
             }
             
         }
-
-        function validar(elemento){
-            return 1;
-        }
+        
+        
 
         function encriptar() {
-            var input = document.querySelector("input");
+            var input = document.querySelector("#texto");
+            
             let textoPlano = input.value;
-            let textoEncriptado =  logica(textoPlano,1);
-            document.getElementById("mensajecifrado").innerHTML = textoEncriptado;    
+            if (verificar(textoPlano)) {
+                let textoEncriptado =  logica(textoPlano,1);
+                document.getElementById("mensajecifrado").innerHTML = textoEncriptado;  
+            }
+            input.focus();
+             
         }
 
         function desencriptar() {
-            var input = document.querySelector("input");
+            var input = document.querySelector("#texto");
+            input.focus();
             let textoPlano = input.value;
-            let textoDesencriptado =  logica(textoPlano,2);
-            document.getElementById("mensajecifrado").innerHTML = textoDesencriptado;    
-        }
+            if (verificar(textoPlano)){
+                let textoDesencriptado =  logica(textoPlano,2);
+                document.getElementById("mensajecifrado").innerHTML = textoDesencriptado;    
+
+            }
+            input.focus();
+            }
+
+            
 
         function copiarTexto(){
             var texto = document.getElementById("mensajecifrado");
             texto.select();
             document.execCommand('copy');
+		    document.querySelector("#texto").focus();
+            
         }
     
     
@@ -92,7 +140,10 @@
 
         var button2 = document.querySelector("#desencriptador");
         button2.onclick = desencriptar;
-               
+        
+        
+
+        
     </script>
     
 </body>
