@@ -31,7 +31,7 @@
             <div class="display:inline">
                 <div style="width:53%;display:inline-block">
                     <p class="mensaje-validador"  >&#9888 Solo se aceptan letras minusculas y letras sin acento.</p> 
-                    <p id="elemento" style="display:none;" class="texto-aviso">Se requiere texto.</p>
+                    <p id="elemento" style="display:none" class="texto-aviso">Se requiere texto.</p>
                     <button class="btn-encriptador" id="encriptador" type="submit">Encriptar</button>
                     <button class="btn-segundo" id="desencriptador"  type="submit">Desencriptar</button>
                 </div>
@@ -54,8 +54,11 @@
         function verificar(e){
             var input = document.querySelector("#texto");
             let texto = input.value;
-            if (texto.length === 0 ){
+            let r = /\s+/gi;
+            if (r.test(texto) || texto==''){
 			    document.getElementById('elemento').style.display = 'block';
+                input.value = '';
+                input.focus();
                 return false;
             }
             else{
