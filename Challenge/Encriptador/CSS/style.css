@@ -1,62 +1,120 @@
 
 .cuerpo-principal{
+    font-family: 'Courier New', Courier, monospace;
     background-color: #297ae3;
-    margin: 29px;
-    padding: 10px;
+    margin-top: 25px;margin-left: 11px;margin-bottom: 0px;
+
 }
 header{
-    text-align: center;
-    color: #fff;
-    font-size: larger;
-    display:block;
     background:#297ae3;
+    width: 97%;height: 150px;
+}
+header img{
+    width:350px;
+}
+header h1{
+    position: absolute;
+    top: 64px;
+    text-align: center;
+    text-transform: uppercase;
+    font-display: 18px;
+    color: rgb(231, 226, 226);
+    font-weight: bold;
+    font-size: 25px;
+    text-decoration: none;
+    display: inline;
+    margin: auto;
 }
 
 
 .caja{
+    width: 940px;
     position: relative;
-    margin: 0 auto;
-    
+    margin: auto;
 
 }
-.mensajetextarea{
+.mensajetextarea1{
+    align-self: center;
     background:#297ae3;
-    border:none; 
+    padding:10px;
+    margin:10px;
     display: inline-block;
+    position:center;
+    width:600px;height:200px;
 
   
 }
-.bloquemensaje{
+.mensajetextarea2{
+    position:center;
+    align-self: center;
     padding:10px;
-    margin:0 auto;
+    margin:10px;
+    display: inline-block;
+    width:300px;height:200px;
+
 }
 
 
-.mensaje{
+.mensaje1{
+    font-size:15px;
     border-radius: 10px;
+    background: #297ae3;
+    border: 2px #1161cf ;
+    width:100%;
+    height:100%;
 }
+
+.mensaje2{
+    font-size:15px;
+    align-self: center;
+    border-radius: 10px;
+    background: #cccccc;
+    border: none;
+    width:100%;
+    height:100%;
+    
+}
+
+.texto-aviso{
+    font-size:20px;
+    color: #000000;
+    width:600px;height: 30px;
+    text-align: center;
+    opacity: 2;
+}
+.mensaje-validador{
+    font-size:15px;
+    text-align: center;
+    color: #cccccc;
+    width:600px;
+    margin: 10px;
+}
+
 .btn-encriptador{
-    width:40%;
-    padding: 15px 0;
-    font-size: 18px;
+    width: 30%;
+    padding: 10px ;
+    border: 10px;
+    font-size: 13px;
     color:white;
     background: grey;
     border:none;
     border-radius: 10px;
     transition: 1s all;
     cursor: pointer;
+    margin-left: 113px;
 
 }
 .btn-segundo{
-    width:40%;
-    padding: 15px 0;
-    font-size: 18px;
+    width:30%;
+    padding: 10px 0;
+    font-size: 13px;
     color:white;
     background: rgb(55, 104, 196);
     border:none;
     border-radius: 10px;
     transition: 1s all;
     cursor: pointer;
+
 
 }
 
