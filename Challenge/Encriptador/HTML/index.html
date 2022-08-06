@@ -57,10 +57,9 @@
             let r = /\s+/gi;
             if (r.test(texto) || texto==''){
 			    document.getElementById('elemento').style.display = 'block';
-                input.value = '';
-                input.focus();
                 return false;
-            }
+            }input.value = '';
+                input.focus();
             else{
                 document.getElementById('elemento').style.display = 'none';
                 return true;
@@ -112,10 +111,10 @@
             var input = document.querySelector("#texto");
             
             let textoPlano = input.value;
-            if (verificar(textoPlano)) {
+    
                 let textoEncriptado =  logica(textoPlano,1);
                 document.getElementById("mensajecifrado").innerHTML = textoEncriptado;  
-            }
+            
             input.focus();
              
         }
@@ -124,11 +123,8 @@
             var input = document.querySelector("#texto");
             input.focus();
             let textoPlano = input.value;
-            if (verificar(textoPlano)){
                 let textoDesencriptado =  logica(textoPlano,2);
-                document.getElementById("mensajecifrado").innerHTML = textoDesencriptado;    
-
-            }
+                document.getElementById("mensajecifrado").innerHTML = textoDesencriptado;   
             input.focus();
             }
 
