@@ -59,7 +59,7 @@ header h1{
     font-size:15px;
     border-radius: 10px;
     background: #297ae3;
-    border: 2px #1161cf ;
+    border: 1px solid #0d4894 ;
     width:100%;
     height:100%;
 }
@@ -69,7 +69,7 @@ header h1{
     align-self: center;
     border-radius: 10px;
     background: #cccccc;
-    border: none;
+    border: 1px solid #0d4894 ;
     width:100%;
     height:100%;
     
