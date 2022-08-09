@@ -1,109 +1,12 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-    <link rel="stylesheet" href="../CSS/reset.css">
-    <link rel="stylesheet" href="../CSS/style.css">
-    <link rel="shortcut icon" href="../imagenes/favicon(1).ico" type="image/x-icon">
-    <link rel="icon" href="../imagenes/favicon(1).ico" type="image/x-icon">
-    <title>Encriptador</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio.</title>
 </head>
-<body class="cuerpo-principal">
-    <header>
-        <div class="caja" >
-            <img src="../imagenes/logo.png" style="width: 150px;" alt="">
-            <h1>Encriptador/Desencriptador de texto.</h1> 
-        </div>
-         
-    </header>
-    <main>
-        <div class="cuerpo-principal">
-            <div class="mensajetextarea1">
-                <textarea class="mensaje1"  required name="texto" id="texto"  placeholder="Ingrese el texto aqui" type="text" cols="20" rows="10"> </textarea>
-                
-            </div>
-            <div class="mensajetextarea2">
-                <textarea  class="mensaje2" readonly="enable" placeholder="Ingresa un texto para encriptar o desencriptar" name="mensajeresultado" id="mensajeresultado" cols="20" rows="10"></textarea>
-                </div>
-            <div class="display:inline">
-                <div style="width:53%;display:inline-block">
-                    <p class="mensaje-validador" name="mensaje-validador">&#9888 Solo se aceptan letras minusculas y letras sin acento.</p> 
-                    <p name="elemento" id="elemento" style="display:none" class="texto-aviso">Agregue un mensaje válido.</p>
-                    <button class="btn-encriptador" id="encriptador" onclick="encriptar()" type="submit">Encriptar</button>
-                    <button class="btn-segundo" id="desencriptador" onclick="desencriptar()"  type="submit">Desencriptar</button>
-                </div>
-                <div style="width:40%; margin-left: 70px; display:inline-block ;">
-                    <button class="btn-segundo" id="copiarTxt" onclick="copiarTexto()" type="button"> Copiar mensaje </button>
-                </div>
-                
-            </div>
-            
-        </div>
-
-    </main>
-    <footer>
-        <p class="footer"> Encriptador - Academia ONE - Santiago Pérez - 2022</p>
-    </footer>
-    
-   
-
-    <script>
-
-    var input = document.querySelector("#texto");
-    var regexCE = /([A-ZáéíóúÁÉÍÓÚñ\d$@$%*?&])/gm;
-    function encriptar() {
-        var input = document.querySelector("#texto");
-        if (input.value.length != 0 && !regexCE.test(input.value)) {
-            document.getElementById('elemento').style.display = 'none';
-            var texto1 = input.value;
-            texto1 = texto1.replace(/e/gi,"enter");
-            texto1 = texto1.replace(/i/gi,"imes");
-            texto1 = texto1.replace(/a/gi,"ai");
-            texto1 = texto1.replace(/o/gi,"ober");
-            texto1 = texto1.replace(/u/gi,"ufat");
-            document.getElementById("mensajeresultado").innerHTML = texto1;  
-        }
-        else{
-            document.getElementById('elemento').style.display = 'block';
-            input.value = '';
-        }
-        input.focus();         
-    }
-
-    function desencriptar() {
-        var input = document.querySelector("#texto");
-        if (input.value.length != 0 && !regexCE.test(input.value)) {
-            document.getElementById('elemento').style.display = 'none';
-            var texto2 = input.value;
-            texto2 = texto2.replace(/enter/gi,"e");
-            texto2 = texto2.replace(/imes/gi,"i");
-            texto2 = texto2.replace(/ai/gi,"a");
-            texto2 = texto2.replace(/ober/gi,"o");
-            texto2 = texto2.replace(/ufat/gi,"u");
-            console.log(texto2);
-            document.getElementById("mensajeresultado").innerHTML = texto2;  
-        }
-        else{
-            document.getElementById('elemento').style.display = 'block';
-            input.value = '';
-        }
-        input.focus();     
-        }
-    function copiarTexto(){
-        var texto = document.getElementById("mensajeresultado");
-        texto.select();
-        document.execCommand('copy');
-        input.value="";
-		input.focus();    
-    }
-              
-    </script>
-    
+<body>
+  <a href="../HTML/encriptador.html">pal encriptador</a>
 </body>
 </html>
-
-
