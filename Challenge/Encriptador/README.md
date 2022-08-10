@@ -29,7 +29,7 @@ Las "llaves" de encriptación que utilizaremos son las siguientes:
 
 ## Insignia Challenge concluido.
 
-![Insignia](https://d335luupugsy2.cloudfront.net/cms%2Ffiles%2F10224%2F1659462746Badge_Sharer_Alura_ChallengeOracleONE_2000x2000_V3.png?utm_campaign=alura_latam_-_challenge_email_projeto_1_esp&utm_medium=email&utm_source=RD+Station)
+![Insignia](https://github.com/SantiPerez17/santiperez17.github.io/blob/main/Challenge/Encriptador/imagenes/Insignia_Alura_Challenge_Encriptador_%20OracleONE.png)
 
 ## Screenshots
 
