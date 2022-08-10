@@ -58,7 +58,6 @@
             </div>
 
         </section>
-        
     </main>
 
     <footer class="PiePagina">
@@ -66,6 +65,25 @@
     </footer>
     
     <script>
+
+            let lista= ['holada','chau']
+            let cache= [];
+
+            document.addEventListener("keydown", (evento) => {
+                let a = evento.code.replace("Key",'').toLowerCase();
+                
+                if (!cache.includes(a)){
+                    cache.push(a);
+                    console.log(lista[0].includes(a));
+                }
+                console.log(cache);
+                console.log(evento.code.replace("Key",'').toLowerCase());
+                });
+            
+            
+            
+
+        
         function agregarPalabra(){
             document.querySelector(".input-nueva-palabra").value =""; 
             document.querySelector(".menu-inicial").style.display="none"; 
