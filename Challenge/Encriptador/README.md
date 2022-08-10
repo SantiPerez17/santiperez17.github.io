@@ -35,15 +35,15 @@ Las "llaves" de encriptación que utilizaremos son las siguientes:
 
 #### Imagen Inicial
 
-                ![IMG1](https://github.com/SantiPerez17/santiperez17.github.io/blob/main/Challenge/Encriptador/imagenes/Imagen-Inicial.png)
+![IMG1](https://github.com/SantiPerez17/santiperez17.github.io/blob/main/Challenge/Encriptador/imagenes/Imagen-Inicial.png)
 
 #### Imagen Probando
 
-                ![IMG2](https://github.com/SantiPerez17/santiperez17.github.io/blob/main/Challenge/Encriptador/imagenes/Imagen-Probando.png)
+![IMG2](https://github.com/SantiPerez17/santiperez17.github.io/blob/main/Challenge/Encriptador/imagenes/Imagen-Probando.png)
                 
 #### Error
 
-                ![IMG3](https://github.com/SantiPerez17/santiperez17.github.io/blob/main/Challenge/Encriptador/imagenes/Error.png)
+![IMG3](https://github.com/SantiPerez17/santiperez17.github.io/blob/main/Challenge/Encriptador/imagenes/Error.png)
                 
 
 
