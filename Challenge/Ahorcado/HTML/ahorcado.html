@@ -18,7 +18,7 @@
     <main class="cuerpo-principal">
         <section class="menu-inicial" >
             <div class="boton-inicio">
-                <button class="boton-inicio-juego" type="submit">
+                <button class="boton-inicio-juego" onclick="nuevoJuego()" type="submit">
                     <p>
                         Iniciar Juego
                     </p> 
@@ -65,20 +65,73 @@
     </footer>
     
     <script>
+        function nuevoJuego(){
+            let lista= ['hola','chau','caca','amigo','documento','caiman','pelo','html','ahorcado','juego']
+            let cacheFallada = new Set();
+            let fallada= 0;
+            
+            function cargarPalabraConLongitud(lista){
+                let a = Math.round(Math.random()*lista.length)
+                let palabra = lista[a];
+                return [palabra.length,palabra.toUpperCase()];
+            }
 
-            let lista= ['holada','chau']
-            let cache= [];
-
+            const palabraElegida = cargarPalabraConLongitud(lista);
+            //console.log('palabra : ' + palabraElegida);
+            let arrayPalabra = palabraElegida[1].split("");
+            cachePalabra = new Set(arrayPalabra);
+            let aciertosR = cachePalabra.size;
+            let letrasPresionadas = new Set();
+            console.log('tiene ' + (arrayPalabra.length) + ' espacios.')
             document.addEventListener("keydown", (evento) => {
-                let a = evento.code.replace("Key",'').toLowerCase();
-                
-                if (!cache.includes(a)){
-                    cache.push(a);
-                    console.log(lista[0].includes(a));
+                console.log(evento.keyCode);
+                let letraPresionada = evento.code.replace("Key",'');
+                console.log(letraPresionada);
+                if (evento.keyCode<=90 && evento.keyCode>=65) {
+                    let p = palabraElegida[1];
+                //console.log('palabra : ' + p);
+                //console.log('letra presionda: ' + letraPresionada)
+                //console.log('la letra esta? : ' + p.includes(letraPresionada));
+                if (cachePalabra.has(letraPresionada)){
+                    if(!letrasPresionadas.has(letraPresionada)){
+                        aciertosR=aciertosR-1;
+                        letrasPresionadas.add(letraPresionada);
+                        //console.log('ocurrencias : ' + (p.split(letraPresionada).length - 1));
+                        //console.log('array original: ' + arrayPalabra);
+                        //console.log(cachePalabra);
+                        console.log('acertaste' + (cachePalabra.size-aciertosR) + 'veces.')
+                        if (aciertosR==0){alert('ganaste!')}
+                    }
+                    else{
+                        console.log('letra ya presionada.');
+                    }
+                    
+                }  
+                else {
+                    if (!cacheFallada.has(letraPresionada)){
+                        fallada+=1;
+                        cacheFallada.add(letraPresionada);
+                        console.log(fallada);
+                        console.log(cacheFallada);
+                        console.log('fallaste');
+                    }
+                    else{
+                        console.log('letra ya presionada.');
+                    }
+                    if(fallada == 7){
+                        alert("perdiste");
+                        window.location.reload()
+                    }
+                    
                 }
-                console.log(cache);
-                console.log(evento.code.replace("Key",'').toLowerCase());
-                });
+                } 
+                else{
+                    console.log("presione una letra.")
+                }               
+            });
+
+        }
+            
             
             
             
