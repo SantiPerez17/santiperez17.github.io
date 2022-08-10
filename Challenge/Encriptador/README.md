@@ -25,3 +25,12 @@ Las "llaves" de encriptación que utilizaremos son las siguientes:
 
 #### Extras:
 - Un botón que copie el texto encriptado/desencriptado para la sección de transferencia, o sea que tenga la misma funcionalidad del ctrl+C o de la opción "copiar" del menú de las aplicaciones.
+
+
+## Insignia Challenge concluido.
+
+
+## Screenshots
+
+![IMAGEN1](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
