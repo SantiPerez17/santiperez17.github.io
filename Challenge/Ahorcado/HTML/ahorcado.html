@@ -20,7 +20,7 @@
     <main class="cuerpo-principal">
         <section class="menu-inicial">
             <div class="boton-inicio">
-                <button class="boton-inicio-juego" onclick="nuevoJuego()" type="submit">
+                <button class="boton-inicio-juego" onclick="nuevoJuego()" id="boton-inicio-juego" type="submit">
                     <p>
                         Iniciar Juego
                     </p>
@@ -50,12 +50,12 @@
                 </p>
             </div>
             <div class="parte-botones">
-                <button class="btn-agregar-palabra" onclick="agregarPalabra()">
+                <button id="btn-agregar-palabra" onclick="nuevoJuego()" type="submit"  class="btn-agregar-palabra">
                     <p>
                         Guardar y empezar
                     </p>
                 </button>
-                <button class="btn-cancelar" onclick="cancelar()">
+                <button class="btn-cancelar" type="submit" onclick="cancelar()">
                     <p>
                         Cancelar
                     </p>
@@ -71,12 +71,12 @@
             <p id="letras-erradas" class="letras-erradas">
             </p>
             <div class="parte-botones">
-                <button class="btn-agregar-palabra" onclick="nuevoJuego()">
+                <button class="btn-agregar-palabra" type="submit" onclick="nuevoJuego()" id="boton-inicio-juego">
                     <p>
                         Nuevo Juego
                     </p>
                 </button>
-                <button class="btn-cancelar" onclick="cancelar()">
+                <button class="btn-cancelar" type="submit" onclick="cancelar()">
                     <p>
                         Desistir
                     </p>
@@ -91,58 +91,72 @@
 
     <script>
         let lista = ['HOLA', 'CHAU', 'CACA', 'AMIGO', 'DOCUMENTO', 'CAIMAN', 'PELO', 'HTML', 'AHORCADO', 'JUEGO']
-        let cacheFallada = new Set();
+        let cacheFallada;
         let fallada = 1;
         let imagen = document.querySelector('.juego img');
         console.log(imagen);
+        const agregarPalabra = document.getElementById("btn-agregar-palabra");
+        const nuevoJuegoPantalla = document.getElementById("boton-inicio-juego");
+        const nuevoJuegoBoton = document.getElementById("boton-inicio-juego");
+        var a;
+        var palabraElegida;
+        let arrayPalabra;
+        let letrasPresionadas;
+        let aciertosR;
+        const parrafo = document.querySelector('.palabra-a-adivinar');
+        const parrafoFallada = document.querySelector(".letras-erradas");
 
-
-        function cargarPalabraConLongitud(lista) {
-            let a = Math.round(Math.random() * lista.length)
-            return [lista[a].length, lista[a].toUpperCase()];
-        }
-        var palabraElegida = cargarPalabraConLongitud(lista);
-
-        function nuevoJuego() {
-            imagen.src = '../Imagenes/img1.png';
-            document.querySelector(".menu-inicial").style.display = "none";
-            document.querySelector(".parte-agregar-palabra").style.display = "none";
-            document.querySelector(".juego").style.display = "block";
-            var palabraElegida = cargarPalabraConLongitud(lista);
-            const parrafo = document.querySelector('.palabra-a-adivinar');
-            const parrafoFallada = document.querySelector(".letras-erradas");
+        function nuevoJuego(){
+            a = 0;
+            palabraElegida = [];
+            arrayPalabra = [];
+            letrasPresionadas = new Set();
+            cacheFallada = new Set();
+            aciertosR;
+            a = Math.round(Math.random() * lista.length);
+            palabraElegida = [lista[a].length, lista[a]];
+            
             parrafo.innerHTML = '';
             for (let i = 0; i < palabraElegida[1].length; i++) {
                 const span = document.createElement('span');
                 parrafo.appendChild(span);
             }
+            arrayPalabra = palabraElegida[1].split("");
             console.log('palabra : ' + palabraElegida);
-            let arrayPalabra = palabraElegida[1].split("");
+            console.log('tiene ' + (arrayPalabra.length) + ' espacios.');
+            aciertosR = arrayPalabra.length;
             cachePalabra = new Set(arrayPalabra);
-            let aciertosR = cachePalabra.size;
-            let letrasPresionadas = new Set();
-            console.log('tiene ' + (arrayPalabra.length) + ' espacios.')
-            document.addEventListener("keydown", (evento) => {
-                console.log(evento.keyCode);
-                let letraPresionada = evento.code.replace("Key", '');
-                console.log(letraPresionada);
-                const spans = document.querySelectorAll('#palabra-a-adivinar span');
-                if (evento.keyCode <= 90 && evento.keyCode >= 65) {
-                    let p = palabraElegida[1];
-                    if (cachePalabra.has(letraPresionada)) {
-                        if (!letrasPresionadas.has(letraPresionada)) {
-                            aciertosR = aciertosR - 1;
-                            letrasPresionadas.add(letraPresionada);
-                            console.log(letrasPresionadas);
-                            for (let i = 0; i < palabraElegida[1].length; i++) {
-                                if (letraPresionada == palabraElegida[1][i]) {
-                                    spans[i].innerHTML = letraPresionada;
-                                }
+            aciertosR = cachePalabra.size;
+            };
+            
+        document.addEventListener("keydown", (evento) => {
+            console.log(evento.keyCode);
+            let letraPresionada = evento.code.replace("Key", '');
+            console.log(letraPresionada);
+            const spans = document.querySelectorAll('#palabra-a-adivinar span');
+            if (evento.keyCode <= 90 && evento.keyCode >= 65) {
+                let p = palabraElegida[1];
+                if (cachePalabra.has(letraPresionada)) {
+                    if (!letrasPresionadas.has(letraPresionada)){
+                        aciertosR = aciertosR - 1;
+                        letrasPresionadas.add(letraPresionada);
+                        console.log("se presionó: " + letraPresionada.toString());
+                        console.log("LETRAS ACERTADAS");
+                        console.log(letrasPresionadas);
+                        for (let i = 0; i < palabraElegida[1].length; i++) {
+                            if (letraPresionada == palabraElegida[1][i]) {
+                                spans[i].innerHTML = letraPresionada;
                             }
-                            console.log('acertaste ' + (cachePalabra.size - aciertosR) + ' veces.')
-                            if (aciertosR == 0) { alert('ganaste!'); window.location.reload(); }
                         }
-                        else {
+                        console.log('acertaste ' + (cachePalabra.size - aciertosR) + ' veces.')
+                        if (aciertosR == 0) { 
+                            alert('ganaste!');   
+                            window.location.reload(); 
+                            palabraElegida= [];
+                            a=0;
+                        }
+                    }
+                    else {
                             console.log('letra ya presionada.');
                         }
                     }
@@ -153,8 +167,9 @@
                             const source = "../Imagenes/img"+fallada+".png";
                             imagen.src = source;
                             cacheFallada.add(letraPresionada);
-                            console.log(fallada);
-                            console.log(cacheFallada);
+                            console.log("se presionó: " + letraPresionada.toString());
+                            console.log("LETRAS FALLADAS");
+                            console.log((cacheFallada));
                             const span = document.createElement('span');
                             parrafoFallada.appendChild(span);
                             span.innerHTML = letraPresionada
@@ -165,6 +180,8 @@
                         }
                         if (fallada == 10) {
                             alert("perdiste");
+                            palabraElegida= [];
+                            a = 0;
                             window.location.reload();
                         }
                     }
@@ -172,13 +189,33 @@
                 else {
                     console.log("presione una letra.")
                 }
-            });
-        }
+                });
 
 
+        
+        agregarPalabra.addEventListener("click",() => {
+            let input = document.getElementById("input-nueva-palabra").value;
+            if (!lista.includes(input) && !input == "" && /[A-Z]+/g.test(input)) {
+                document.querySelector(".juego").style.display = "block";
+                console.log("lista original:" + (lista));
+                lista.push(input);
+                console.log("lista cambiada:" + (lista));
+                document.querySelector(".parte-agregar-palabra").style.display = "none";
+                nuevoJuego;
+            }
+            else {
+                document.getElementById("input-nueva-palabra").style = "border: 1px solid red";
+                document.getElementById('aviso-input').innerHTML = 'Ya se encuentra o no se agregó nada.';
+                console.log("ya se encuentra");
+            }
+        });
 
-
-
+        nuevoJuegoPantalla.addEventListener("click",() => {
+            imagen.src = '../Imagenes/img1.png';
+            document.querySelector(".menu-inicial").style.display = "none";
+            document.querySelector(".parte-agregar-palabra").style.display = "none";
+            document.querySelector(".juego").style.display = "block";
+        });
 
         function agregarPalabraPantalla() {
             document.querySelector(".menu-inicial").style.display = "none";
@@ -186,23 +223,6 @@
             document.querySelector(".input-nueva-palabra").value = "";
         }
 
-        function agregarPalabra() {
-            let input = document.getElementById("input-nueva-palabra").value;
-            if (!lista.includes(input) && !input == "" && /[A-Z]+/g.test(input)) {
-                document.querySelector(".juego").style.display = "flex";
-                console.log("lista original:" + (lista));
-                lista.push(input);
-                console.log("lista cambiada:" + (lista));
-                nuevoJuego();
-            }
-            else {
-                document.getElementById("input-nueva-palabra").style = "border: 1px solid red";
-                document.getElementById('aviso-input').innerHTML = 'Ya se encuentra o no se agregó nada.';
-                console.log("ya se encuentra");
-            }
-
-
-        }
         function cancelar() {
             document.querySelector(".juego").style.display = "none";
             document.querySelector(".parte-agregar-palabra").style.display = "none";
