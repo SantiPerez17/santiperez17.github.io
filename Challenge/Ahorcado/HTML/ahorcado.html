@@ -84,12 +84,18 @@
             </div>
         </section>
         <section id="mensaje-final" class="mensaje-final">
-            <div id="myModal" class="modal">
-                <div class="modal-content">
-                  <span class="close">&times;</span>
-                  <p></p>
+            <div class="modal" id="modal1" data-animation="slideInOutLeft">
+                <div class="modal-dialog">
+                  <header class="modal-header">
+                    Resultado
+                    <button id ="close-modal" class="close-modal" aria-label="close modal" data-close>
+                      ✕  
+                    </button>
+                  </header>
+                  <section class="modal-content">
+                    <p class="mensaje-cartel" id="mensaje-cartel"><strong></strong></p>
+                  </section>
                 </div>
-              
               </div>
         </section>
     </main>
@@ -103,10 +109,10 @@
         let cacheFallada;
         let fallada;
         let imagen;
-        console.log(imagen);
         const agregarPalabra = document.getElementById("btn-agregar-palabra");
         const nuevoJuegoPantalla = document.getElementById("boton-inicio-juego");
         const nuevoJuegoBoton = document.getElementById("boton-inicio-juego");
+        const closeModal = document.getElementById("close-modal");
         var a;
         var palabraElegida;
         let arrayPalabra;
@@ -115,8 +121,17 @@
         let parrafo = document.querySelector('.palabra-a-adivinar');
         let parrafoFallada = document.querySelector(".letras-erradas");
         let source;
+        var leer_teclas;
+ 
+
+        closeModal.addEventListener("click", ()=>{
+            document.querySelector(".mensaje-final").style="display:none";
+        });
+        
 
         function nuevoJuego(){
+            leer_teclas = true;
+            console.log(leer_teclas)
             imagen = document.querySelector('.juego img');
             a = 0;
             palabraElegida = [];
@@ -143,68 +158,75 @@
             let p;
             source = "../Imagenes/img"+1+".png";
             imagen.src = source;
-            };
+        };
+
 
         document.addEventListener("keydown", (evento) => {
-            console.log(evento.keyCode);
-            let letraPresionada = evento.code.replace("Key", '');
-            console.log(letraPresionada);
-            const spans = document.querySelectorAll('#palabra-a-adivinar span');
-            if (evento.keyCode <= 90 && evento.keyCode >= 65) {
-                p = palabraElegida[1];
-                if (cachePalabra.has(letraPresionada)) {
-                    if (!letrasPresionadas.has(letraPresionada)){
-                        aciertosR = aciertosR - 1;
-                        letrasPresionadas.add(letraPresionada);
-                        console.log("se presionó: " + letraPresionada.toString());
-                        console.log("LETRAS ACERTADAS");
-                        console.log(letrasPresionadas);
-                        for (let i = 0; i < palabraElegida[1].length; i++) {
-                            if (letraPresionada == palabraElegida[1][i]) {
-                                spans[i].innerHTML = letraPresionada;
+            if (leer_teclas===true) {
+                console.log(evento.keyCode);
+                    let letraPresionada = evento.code.replace("Key", '');
+                    console.log(letraPresionada);
+                    const spans = document.querySelectorAll('#palabra-a-adivinar span');
+                    if (evento.keyCode <= 90 && evento.keyCode >= 65) {
+                        p = palabraElegida[1];
+                        if (cachePalabra.has(letraPresionada)) {
+                            if (!letrasPresionadas.has(letraPresionada)) {
+                                aciertosR = aciertosR - 1;
+                                letrasPresionadas.add(letraPresionada);
+                                console.log("se presionó: " + letraPresionada.toString());
+                                console.log("LETRAS ACERTADAS");
+                                console.log(letrasPresionadas);
+                                for (let i = 0; i < palabraElegida[1].length; i++) {
+                                    if (letraPresionada == palabraElegida[1][i]) {
+                                        spans[i].innerHTML = letraPresionada;
+                                    }
+                                }
+                                console.log('acertaste ' + (cachePalabra.size - aciertosR) + ' veces.')
+                                if (aciertosR == 0) { 
+                                    document.querySelector(".mensaje-cartel").innerHTML ="GANASTE!!!!";
+                                    document.querySelector(".mensaje-final").style="visibility: visible;opacity: 1;display:flex";
+                                    palabraElegida= [];
+                                    a=0;
+                                    leer_teclas=false;
+                                }
+                            }
+                            else {
+                                    console.log('letra ya presionada.');
+                                }
+                            }
+                            else {
+                                if (!cacheFallada.has(letraPresionada)) {
+                                    fallada++;
+                                    console.log(fallada)
+                                    source = "../Imagenes/img"+fallada+".png";
+                                    imagen.src = source;
+                                    cacheFallada.add(letraPresionada);
+                                    console.log("se presionó: " + letraPresionada.toString());
+                                    console.log("LETRAS FALLADAS");
+                                    console.log(cacheFallada);
+                                    span = document.createElement('span');
+                                    parrafoFallada.appendChild(span);
+                                    span.innerHTML = letraPresionada;
+                                    console.log('fallaste');
+                                }
+                                else {
+                                    console.log('letra ya presionada.');
+                                }
+                                if (fallada == 10) {
+                                    document.querySelector(".mensaje-cartel").innerHTML ="Perdiste!!!! :c";
+                                    document.querySelector(".mensaje-final").style="visibility: visible;opacity: 1;display:flex";
+                                    palabraElegida= [];
+                                    a = 0;
+                                    leer_teclas=false;
+                                }
                             }
                         }
-                        console.log('acertaste ' + (cachePalabra.size - aciertosR) + ' veces.')
-                        if (aciertosR == 0) { 
-                            alert('ganaste!');   
-                            palabraElegida= [];
-                            a=0;
-                        }
-                    }
-                    else {
-                            console.log('letra ya presionada.');
-                        }
-                    }
-                    else {
-                        if (!cacheFallada.has(letraPresionada)) {
-                            fallada++;
-                            console.log(fallada)
-                            source = "../Imagenes/img"+fallada+".png";
-                            imagen.src = source;
-                            cacheFallada.add(letraPresionada);
-                            console.log("se presionó: " + letraPresionada.toString());
-                            console.log("LETRAS FALLADAS");
-                            console.log(cacheFallada);
-                            span = document.createElement('span');
-                            parrafoFallada.appendChild(span);
-                            span.innerHTML = letraPresionada;
-                            console.log('fallaste');
-                        }
                         else {
-                            console.log('letra ya presionada.');
+                            console.log("presione una letra.")
                         }
-                        if (fallada == 10) {
-                            alert("perdiste");
-                            palabraElegida= [];
-                            a = 0;
-                            window.location.reload();
-                        }
-                    }
-                }
-                else {
-                    console.log("presione una letra.")
-                }
-                });
+            }
+        });
+        
 
 
         
@@ -216,7 +238,7 @@
                 lista.push(input);
                 console.log("lista cambiada:" + (lista));
                 document.querySelector(".parte-agregar-palabra").style.display = "none";
-                nuevoJuego;
+                nuevoJuego();
             }
             else {
                 document.getElementById("input-nueva-palabra").style = "border: 1px solid red";
@@ -239,6 +261,8 @@
         }
 
         function cancelar() {
+            leer_teclas=false;
+            console.log(leer_teclas)
             document.querySelector(".juego").style.display = "none";
             document.querySelector(".parte-agregar-palabra").style.display = "none";
             document.querySelector(".menu-inicial").style.display = "flex";
