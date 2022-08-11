@@ -228,6 +228,14 @@ main{
   padding-top: 0px;
   overflow: visible;
 }
+
+.mensaje-final{
+    display:none;
+    width: 100%;
+    text-align: center;
+}
+
+
 .footer{
     width:100%;
     font-family: 'Courier New', Courier, monospace;

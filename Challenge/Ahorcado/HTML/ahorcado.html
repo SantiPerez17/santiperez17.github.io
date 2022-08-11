@@ -83,6 +83,15 @@
                 </button>
             </div>
         </section>
+        <section id="mensaje-final" class="mensaje-final">
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <p></p>
+                </div>
+              
+              </div>
+        </section>
     </main>
 
     <footer class="PiePagina">
@@ -92,8 +101,8 @@
     <script>
         let lista = ['HOLA', 'CHAU', 'CACA', 'AMIGO', 'DOCUMENTO', 'CAIMAN', 'PELO', 'HTML', 'AHORCADO', 'JUEGO']
         let cacheFallada;
-        let fallada = 1;
-        let imagen = document.querySelector('.juego img');
+        let fallada;
+        let imagen;
         console.log(imagen);
         const agregarPalabra = document.getElementById("btn-agregar-palabra");
         const nuevoJuegoPantalla = document.getElementById("boton-inicio-juego");
@@ -103,20 +112,23 @@
         let arrayPalabra;
         let letrasPresionadas;
         let aciertosR;
-        const parrafo = document.querySelector('.palabra-a-adivinar');
-        const parrafoFallada = document.querySelector(".letras-erradas");
+        let parrafo = document.querySelector('.palabra-a-adivinar');
+        let parrafoFallada = document.querySelector(".letras-erradas");
+        let source;
 
         function nuevoJuego(){
+            imagen = document.querySelector('.juego img');
             a = 0;
             palabraElegida = [];
             arrayPalabra = [];
             letrasPresionadas = new Set();
-            cacheFallada = new Set();
+            cacheFallada = new Set('');
             aciertosR;
             a = Math.round(Math.random() * lista.length);
             palabraElegida = [lista[a].length, lista[a]];
-            
             parrafo.innerHTML = '';
+            parrafoFallada.innerHTML = '';
+            fallada = 1;
             for (let i = 0; i < palabraElegida[1].length; i++) {
                 const span = document.createElement('span');
                 parrafo.appendChild(span);
@@ -127,15 +139,19 @@
             aciertosR = arrayPalabra.length;
             cachePalabra = new Set(arrayPalabra);
             aciertosR = cachePalabra.size;
+            let span;
+            let p;
+            source = "../Imagenes/img"+1+".png";
+            imagen.src = source;
             };
-            
+
         document.addEventListener("keydown", (evento) => {
             console.log(evento.keyCode);
             let letraPresionada = evento.code.replace("Key", '');
             console.log(letraPresionada);
             const spans = document.querySelectorAll('#palabra-a-adivinar span');
             if (evento.keyCode <= 90 && evento.keyCode >= 65) {
-                let p = palabraElegida[1];
+                p = palabraElegida[1];
                 if (cachePalabra.has(letraPresionada)) {
                     if (!letrasPresionadas.has(letraPresionada)){
                         aciertosR = aciertosR - 1;
@@ -151,7 +167,6 @@
                         console.log('acertaste ' + (cachePalabra.size - aciertosR) + ' veces.')
                         if (aciertosR == 0) { 
                             alert('ganaste!');   
-                            window.location.reload(); 
                             palabraElegida= [];
                             a=0;
                         }
@@ -164,15 +179,15 @@
                         if (!cacheFallada.has(letraPresionada)) {
                             fallada++;
                             console.log(fallada)
-                            const source = "../Imagenes/img"+fallada+".png";
+                            source = "../Imagenes/img"+fallada+".png";
                             imagen.src = source;
                             cacheFallada.add(letraPresionada);
                             console.log("se presionó: " + letraPresionada.toString());
                             console.log("LETRAS FALLADAS");
-                            console.log((cacheFallada));
-                            const span = document.createElement('span');
+                            console.log(cacheFallada);
+                            span = document.createElement('span');
                             parrafoFallada.appendChild(span);
-                            span.innerHTML = letraPresionada
+                            span.innerHTML = letraPresionada;
                             console.log('fallaste');
                         }
                         else {
