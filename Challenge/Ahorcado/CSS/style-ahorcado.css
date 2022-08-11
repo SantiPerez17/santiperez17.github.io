@@ -263,6 +263,7 @@ main{
     background: #0A3871;
     overflow: auto;
     cursor: default;
+    padding: 2%;
   }
   
   .modal-dialog > * {
@@ -274,6 +275,7 @@ main{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 2%;
   }
   
   .modal-header .close-modal {
