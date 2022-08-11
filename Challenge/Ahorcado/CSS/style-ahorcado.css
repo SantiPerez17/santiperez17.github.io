@@ -110,7 +110,8 @@ main{
     width: 100%;
     display: inline-block;
     padding: 2%;
-    margin: 4% 15%
+    margin: 4% 15%;
+    display:none;
 }
 .parte-input{
     width: 100%;
@@ -202,7 +203,23 @@ main{
     order: 0;
     flex-grow: 1;
 }
-
+.juego{
+    width: 100%;
+    text-align: center;
+    display:none;
+}
+.palabra_a_adivinar{
+    height: 3em;
+}
+.palabra-a-adivinar span{
+    vertical-align: bottom;
+    font-size: 2em;
+    border-bottom: 2px solid black;
+    width: 30px;
+    text-align: center;
+    margin-right: 6px;
+    display: inline-block; /* sin esto, por ser un elemento de línea, no tomaría el width */
+}
 .PiePagina{
     width: 100%;
   position: relative;
