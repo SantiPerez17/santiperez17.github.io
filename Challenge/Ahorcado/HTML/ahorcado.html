@@ -64,13 +64,24 @@
 
         </section>
         <section class="juego">
+            <img src="../Imagenes/img1.png" class="imagen" id="imagen" alt="">
             <p id="palabra-a-adivinar" class="palabra-a-adivinar">
 
             </p>
             <p id="letras-erradas" class="letras-erradas">
-
             </p>
-
+            <div class="parte-botones">
+                <button class="btn-agregar-palabra" onclick="nuevoJuego()">
+                    <p>
+                        Nuevo Juego
+                    </p>
+                </button>
+                <button class="btn-cancelar" onclick="cancelar()">
+                    <p>
+                        Desistir
+                    </p>
+                </button>
+            </div>
         </section>
     </main>
 
@@ -81,18 +92,23 @@
     <script>
         let lista = ['HOLA', 'CHAU', 'CACA', 'AMIGO', 'DOCUMENTO', 'CAIMAN', 'PELO', 'HTML', 'AHORCADO', 'JUEGO']
         let cacheFallada = new Set();
-        let fallada = 0;
+        let fallada = 1;
+        let imagen = document.querySelector('.juego img');
+        console.log(imagen);
 
 
         function cargarPalabraConLongitud(lista) {
             let a = Math.round(Math.random() * lista.length)
             return [lista[a].length, lista[a].toUpperCase()];
         }
+        var palabraElegida = cargarPalabraConLongitud(lista);
+
         function nuevoJuego() {
+            imagen.src = '../Imagenes/img1.png';
             document.querySelector(".menu-inicial").style.display = "none";
             document.querySelector(".parte-agregar-palabra").style.display = "none";
             document.querySelector(".juego").style.display = "block";
-            const palabraElegida = cargarPalabraConLongitud(lista);
+            var palabraElegida = cargarPalabraConLongitud(lista);
             const parrafo = document.querySelector('.palabra-a-adivinar');
             const parrafoFallada = document.querySelector(".letras-erradas");
             parrafo.innerHTML = '';
@@ -132,7 +148,10 @@
                     }
                     else {
                         if (!cacheFallada.has(letraPresionada)) {
-                            fallada += 1;
+                            fallada++;
+                            console.log(fallada)
+                            const source = "../Imagenes/img"+fallada+".png";
+                            imagen.src = source;
                             cacheFallada.add(letraPresionada);
                             console.log(fallada);
                             console.log(cacheFallada);
@@ -144,7 +163,7 @@
                         else {
                             console.log('letra ya presionada.');
                         }
-                        if (fallada == 7) {
+                        if (fallada == 10) {
                             alert("perdiste");
                             window.location.reload();
                         }
@@ -154,7 +173,6 @@
                     console.log("presione una letra.")
                 }
             });
-
         }
 
 
@@ -186,6 +204,7 @@
 
         }
         function cancelar() {
+            document.querySelector(".juego").style.display = "none";
             document.querySelector(".parte-agregar-palabra").style.display = "none";
             document.querySelector(".menu-inicial").style.display = "flex";
         }
