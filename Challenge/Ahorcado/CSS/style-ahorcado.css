@@ -135,6 +135,7 @@ main{
     outline: none;
     color: #0A3871;
     resize: none;    
+    padding: 3%;
 }
 .input-nueva-palabra::placeholder{
     font-family: 'Courier New', Courier, monospace;
@@ -142,7 +143,7 @@ main{
 }
 .parte-botones{
     display:flex;
-    margin: 2% 10%;
+    margin: 0% 10%;
     gap: 5%;
 }
 
@@ -207,17 +208,33 @@ main{
     width: 100%;
     text-align: center;
     display:none;
-    padding: 20px;
+    padding: 1%;
+}
+.juego img{
+    text-align: center;
+    padding: 4px;
+    margin: 1%;
 }
 .palabra_a_adivinar{
     height: 3em;
-    
-    padding: 2%;
+    padding: 1%;
 }
+.letras-erradas{
+    padding:1% 0px;
+}
+.letras-erradas span {
+    color: #0A3871;
+    font-size: 1em;
+    width: 20;
+    text-align: center;
+    margin-right: 6px;
+    display: inline-block; /* sin esto, por ser un elemento de línea, no tomaría el width */
+}
+
 .palabra-a-adivinar span{
     color: #0A3871;
     vertical-align: bottom;
-    font-size: 2em;
+    font-size: 20px;
     border-bottom: 2px solid #0A3871;
     width: 30px;
     text-align: center;
@@ -286,7 +303,6 @@ main{
     margin-top: 1rem;
   }
   
-
 
 .footer{
     width:100%;
